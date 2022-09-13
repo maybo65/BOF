@@ -12,7 +12,7 @@ When a user tries to use sudo, it checks the user belongs to the sudo’ers user
 It should now be clear why it’s attractive to attack the sudo program. With our goal set clearly, let’s begin 😈.
 
 # Part A 
-#The Vulnerability
+## The Vulnerability
 well, as implicit from the repo's name, we are going to take advantage of BOF vulnerability in our sudo program. Lets take a look inside sudo.c: 
 ![image](https://user-images.githubusercontent.com/112778430/190005433-5cb0e90a-fa8a-4887-8b40-8d4307bcfa16.png)
 
@@ -20,7 +20,7 @@ well, as implicit from the repo's name, we are going to take advantage of BOF vu
 
 lets notice the fact that the buff array is of size 20. the salt is of size 11, and the input validation validate that the password is not bigger then 10. The check password function concatenating the password to the salt using strcat. Meaning, that if we will give a password of length 10, the last char of the password will actually be in the memory area on the stack allocated for the auth variable, in the first 2 bytes. this very good for us .
 
-# The Attack Itself
+## The Attack Itself
 in order to get authenticated by sudo, we want that auth will be one: 
 meaning that the first 8 bytes of auth need to be : 01000000 (beacue we are in little indian). so, we need that our last char in our password will be 0x01.
 meaning that if we will give the password: /x01 * 10 times, we will change auth to 1, and will gain root abilities and could run our command as root:
@@ -37,7 +37,7 @@ ok, so rom now on, we will be able to run commands using the real sudo program, 
 
 now, the vulnerability from the first question was fixed, a new and much more interesting vulnerability was introduced in a new program We will exploit this vulnerability to open an interactive shell (using /bin/sh) with root privileges. 
 
-# The (new) Vulnerability
+## The (new) Vulnerability
 again, let's take a quick look at the new sudo program we got:
 ![image](https://user-images.githubusercontent.com/112778430/190007591-7ea1580b-ec20-499d-981e-9c90d452f035.png)
  
