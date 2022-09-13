@@ -1,0 +1,3 @@
+lets notice the fact that the buff array is of size 20. the salt is of size 11, and the input valisdation validate that the password is not bigger then 10. The check password function concatenating the password to the salt using strcat. meaning, that if we will give a password of len 10, the last char of the password will actully be in the memory erea on the stack allocated for the auth varible, in the first 2 bytes. we want that auth will be one: 
+meaning that the first 8 bytes of auth need to be : 01000000 (beacue we are in little indian). so, we need that our last char in our password will be 0x01.
+meaning that if we will give the password: /x01 * 10 times, we will change auth to 1, and will gain root abilities and coulf run our command as root.  
