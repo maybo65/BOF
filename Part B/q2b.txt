@@ -1,0 +1,8 @@
+after analyzing the core file we got from running the sudo program using q1a.py, I found out that 0xbfffdfc9 is where the buffer begins lets call that X, and the return adress of the strcat func is located 18 words after the adress X. 
+we will create an array of 18 words- all nops. lets call this array bar. the nop will use us for padding.
+we will put a piece of assembly code that opens a shell (assembled of course) from X forward, and put the adress of X in the return adress. 
+for that, we are calling the assemble_by_words function, that will give us back an array of words of our shell code. then, we are putting those words in the first places of bar, and put the adress of X (in little indian) in the last cell in bar. after that we are converting the bar array into bytes, and then running the sudo program with the same command that resulted the crash in q1a.py (again- irrelavent becuase we are not going to actully use it. we are only using it to handel the number of args input varification in sudo).
+and that is! fun!
+
+little note: 
+I Know I could also work directly with bytes instead of words, but I notice that X+Y was dividing by 4, meaning spacificly here i could have done that, and found that quite conveniently so I dicided to do so :) 

@@ -1,0 +1,7 @@
+the allocated buff array is of size 65. again, the program concatenating the given password to the salt, this time with no verification of the size of the input.
+the python code generates the folowing string as input:
+AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWXXXXYYYY
+
+this input is to big for the buffer, and resulting a core dumped because we are running over the retrun adress of the strcat function with the string.
+the reason I chose this specific string is because a word is 4 chars, so it will be quite convinient to analyze the memory image when the program crashed using this string string as an input. 
+lastly, we are running the sudo program with this string as the first argument (the password) and some command (the command is irrelevant, it is just there so we could get to the check_password fucntion, and not stop on the input validation (The validation on the number of arguments).
