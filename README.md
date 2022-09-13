@@ -42,7 +42,7 @@ again, let's take a quick look at the new sudo program we got:
 ![image](https://user-images.githubusercontent.com/112778430/190007591-7ea1580b-ec20-499d-981e-9c90d452f035.png)
  
 -   sudo.c inside part B
-- 
+
 The allocated buff array is of size 65. again, the program concatenating the given password to the salt, this time with no verification of the size of the input. Clearly we can use Buffer over flow here. But, we want to do somethin a bit more sophisticated- open a shell. 
 Lucky us, if we manage to override the return address from the function with the vulnerability with assembly commands, the commands we wrote are going to be executed instead of the return to the caller function. 
 
